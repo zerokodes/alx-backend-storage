@@ -18,6 +18,7 @@ def get_page(url: str) -> str:
         redi.incr(f"count:{url}")
         return cached_content.decode('utf-8')
         
+     """ If not cached, fetch the content using requests."""
     redi.set(f"cached:{url}", count)
     response = requests.get(url)
     redi.incr(f"count:{url}")
