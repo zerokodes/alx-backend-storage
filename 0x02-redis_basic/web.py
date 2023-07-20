@@ -5,8 +5,7 @@ import requests
 import redis
 import time
 
-""" Connect to Redis (make sure Redis server is running) """
-redis_client = redis.StrictRedis(host='localhost', port=6379, db=0)
+redis_cleint = redis.Redis()
 
 def expiration_time():
     return int(time.time()) + 10  """ Set the cache expiration time to 10 seconds """
