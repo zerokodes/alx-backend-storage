@@ -25,11 +25,11 @@ def get_page(url: str) -> str:
     content = response.text
     
     # Cache the content in Redis with an expiration time
-    redis_client.setex(url, expiration_time(), content)
+    redis_client.setex(f"cached:{url}", expiration_time(), redis_client.get(f"cached:{url}"))
     
     # Initialize the access count if not present
     if not redis_client.exists(key):
-        redis_client.set(key, 1)
+        redis_client.set(key, 0)
     else:
         # Increment the access count for this URL
         redis_client.incr(key)
