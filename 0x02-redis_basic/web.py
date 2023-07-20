@@ -11,14 +11,6 @@ count = 0
 
 def get_page(url: str) -> str:
     """ Impelements core function of get page which is accessed."""
-     """ Check if the URL's content is already cached in Redis.""""
-    cached_content = redi.get(url)
-    if cached_content:
-        """" Increment the access count for this URL """
-        redi.incr(f"count:{url}")
-        return cached_content.decode('utf-8')
-        
-     """ If not cached, fetch the content using requests."""
     redi.set(f"cached:{url}", count)
     response = requests.get(url)
     redi.incr(f"count:{url}")
