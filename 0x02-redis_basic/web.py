@@ -29,7 +29,7 @@ def get_page(url: str) -> str:
     
     # Initialize the access count if not present
     if not redis_client.exists(key):
-        redis_client.set(key, 0)
+        redis_client.set(key, 1)
     else:
         # Increment the access count for this URL
         redis_client.incr(key)
